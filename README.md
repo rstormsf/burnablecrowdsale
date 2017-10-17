@@ -1,5 +1,5 @@
 TOKEN:
-https://kovan.etherscan.io/address/0x41de4dab97e110da0e387b0daba390365c33a6ae#readContract
+https://kovan.etherscan.io/address/0x47C5a08256065306216b3e7Cd82b599937540d1f
 
 ICO:
-https://kovan.etherscan.io/address/0x3b8aee9607d7b89997f5d62f33fc3df5cb216658#readContract
+https://kovan.etherscan.io/address/0x3a8efa59ec44965aad48830e65f129b1cdcf6c8c#code

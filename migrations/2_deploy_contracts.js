@@ -23,10 +23,12 @@ module.exports = function(deployer) {
     const wallet = web3.eth.accounts[0];
     const spender = web3.eth.accounts[1];
     await token.transfer(spender, 150000000000000000000000000);
-    await deployer.deploy(BurnableCrowdsale, startTime,endTime, 1000, wallet, token.address, spender);
-    const encodedParamsContribution = abiEncoder.rawEncode(['uint256', 'uint256', 'uint256', 'address', 'address', 'address'], [startTime,endTime, 1000, wallet, token.address, spender]);
-    // await token.approve(BurnableCrowdsale.address, 150000000000000000000000000);
+    const cap = new BigNumber(10**18 * 2);
+    await deployer.deploy(BurnableCrowdsale, startTime,endTime, 1000, wallet, token.address, spender, cap);
+    const encodedParamsContribution = abiEncoder.rawEncode(['uint256', 'uint256', 'uint256', 'address', 'address', 'address', 'uint256'], [startTime,endTime, 1000, wallet, token.address, spender, cap.toString(10)]);
+    const crowdsale = await BurnableCrowdsale.deployed();
     console.log('CONTRIBUTION ENCODED: \n', encodedParamsContribution.toString('hex'));
+    await token.approve(crowdsale.address, 150000000000000000000000000, {from: spender});
     
   })
 };
