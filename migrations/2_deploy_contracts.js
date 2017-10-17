@@ -22,9 +22,10 @@ module.exports = function(deployer) {
     const endTime = latestTime() + duration.weeks(5);
     const wallet = web3.eth.accounts[0];
     const spender = web3.eth.accounts[1];
-    await token.approve(spender, 150000000000000000000000000);
+    await token.transfer(spender, 150000000000000000000000000);
     await deployer.deploy(BurnableCrowdsale, startTime,endTime, 1000, wallet, token.address, spender);
     const encodedParamsContribution = abiEncoder.rawEncode(['uint256', 'uint256', 'uint256', 'address', 'address', 'address'], [startTime,endTime, 1000, wallet, token.address, spender]);
+    // await token.approve(BurnableCrowdsale.address, 150000000000000000000000000);
     console.log('CONTRIBUTION ENCODED: \n', encodedParamsContribution.toString('hex'));
     
   })
